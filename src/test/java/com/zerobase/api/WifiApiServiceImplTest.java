@@ -31,7 +31,7 @@ class WifiApiServiceImplTest {
         WifiApiConfig.getInstance().init(wifiApiInfo);
 
         wifiApiService = new WifiApiServiceImpl(
-                new OkHttp3WifiApiProcessor(new OkHttp3RequestMaker()),
+                new OkHttp3WifiApiProcessor(),
                 new GsonWifiApiMessageParser()
         );
     }

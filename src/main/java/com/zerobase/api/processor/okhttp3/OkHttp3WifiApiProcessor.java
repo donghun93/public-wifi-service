@@ -10,10 +10,9 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.Objects;
 
-@RequiredArgsConstructor
 public class OkHttp3WifiApiProcessor implements WifiApiProcessor {
 
-    private final OkHttp3RequestMaker requestMaker;
+    private final OkHttp3RequestMaker requestMaker = new OkHttp3RequestMaker();
     private final OkHttpClient client = new OkHttpClient();
 
     @Override

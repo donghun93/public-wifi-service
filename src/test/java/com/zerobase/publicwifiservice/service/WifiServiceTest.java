@@ -35,7 +35,7 @@ class WifiServiceTest {
         WifiApiConfig.getInstance().init(wifiApiInfo);
 
         WifiApiServiceImpl wifiApiService = new WifiApiServiceImpl(
-                new OkHttp3WifiApiProcessor(new OkHttp3RequestMaker()),
+                new OkHttp3WifiApiProcessor(),
                 new GsonWifiApiMessageParser()
         );
 
@@ -49,8 +49,8 @@ class WifiServiceTest {
         
         wifiService = new WifiService(
                 wifiApiService,
-                new JdbcWifiRepository(connectionInfo),
-                new JdbcHistoryRepository(connectionInfo)
+                new JdbcWifiRepository(),
+                new JdbcHistoryRepository()
         );
     }
     

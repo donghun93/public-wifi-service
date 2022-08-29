@@ -24,9 +24,7 @@ class OkHttp3WifiApiProcessorTest {
                 .build();
         WifiApiConfig.getInstance().init(wifiApiInfo);
 
-
-        OkHttp3RequestMaker requestMaker = new OkHttp3RequestMaker();
-        wifiApiProcessor = new OkHttp3WifiApiProcessor(requestMaker);
+        wifiApiProcessor = new OkHttp3WifiApiProcessor();
     }
 
     @DisplayName("okhttp3 요청 테스트")

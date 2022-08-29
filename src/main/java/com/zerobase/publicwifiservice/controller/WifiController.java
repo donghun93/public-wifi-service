@@ -13,7 +13,7 @@ public class WifiController {
     private final HistoryService historyService;
 
     public String wifiLoadAndSave(Model model) {
-        model.addAttribute("loadWifiResult", wifiService.loadWifiAndSave());
+        model.addAttribute("totalCount", wifiService.loadWifiAndSave());
         return "/wifi/load-wifi";
     }
 

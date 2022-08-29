@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcHistoryRepository extends JdbcBase implements HistoryRepository {
-    public JdbcHistoryRepository(ConnectionInfo info) {
-        super(info);
-    }
 
     @Override
     public void delete(Long deleteId) {

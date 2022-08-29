@@ -1,17 +1,20 @@
 package com.zerobase.publicwifiservice.repository.jdbc;
 
 import com.zerobase.publicwifiservice.config.ConnectionInfo;
+import com.zerobase.publicwifiservice.config.JdbcConfig;
 import lombok.RequiredArgsConstructor;
 
 import java.sql.*;
 
 @RequiredArgsConstructor
 public abstract class JdbcBase {
-
-    protected final ConnectionInfo info;
+    protected ConnectionInfo info;
 
     protected Connection getConnection() throws SQLException {
         try {
+            if(info == null) {
+                info = JdbcConfig.getInstance().getInfo();
+            }
             Class.forName(info.getDriverName());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
