@@ -1,7 +1,5 @@
 package com.zerobase.publicwifiservice.config;
 
-import com.zerobase.api.config.WifiApiConfig;
-import com.zerobase.api.config.WifiApiInfo;
 import lombok.Getter;
 
 @Getter

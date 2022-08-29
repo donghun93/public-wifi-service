@@ -12,10 +12,6 @@ import java.util.List;
 
 public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
 
-    public JdbcWifiRepository(ConnectionInfo info) {
-        super(info);
-    }
-
     @Override
     public List<Wifi> findNearWifiInfo(WifiNearInfo wifiNearInfo) {
         Connection con = null;
