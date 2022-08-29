@@ -42,8 +42,8 @@ public class GsonWifiApiMessageParser implements WifiApiMessageParser {
         return gson.fromJson(element.getAsJsonObject().get("RESULT"), WifiApiResultResponse.class);
     }
 
-    private Long getTotalCount(JsonElement element) {
-        return gson.fromJson(element.getAsJsonObject().get("list_total_count"), Long.class);
+    private Integer getTotalCount(JsonElement element) {
+        return gson.fromJson(element.getAsJsonObject().get("list_total_count"), Integer.class);
     }
 
     private List<WifiApiIntoDetailResponse> getDetailList(JsonElement element) {

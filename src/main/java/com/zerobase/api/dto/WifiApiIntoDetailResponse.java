@@ -1,6 +1,7 @@
 package com.zerobase.api.dto;
 
 import com.google.gson.annotations.SerializedName;
+import com.zerobase.publicwifiservice.domain.Wifi;
 import lombok.Getter;
 
 @Getter
@@ -39,4 +40,25 @@ public class WifiApiIntoDetailResponse {
     private Double lnt;
     @SerializedName(value = "WORK_DTTM")
     private String workDateTime;
+
+    public Wifi toEntity() {
+        return Wifi.builder()
+                .mgrNo(this.mgrNo)
+                .wrdoFc(this.wrdoFc)
+                .mainName(this.mainName)
+                .address1(this.address1)
+                .address2(this.address2)
+                .instlFloor(this.instlFloor)
+                .instlTy(this.instlTy)
+                .instlMby(this.instlMby)
+                .svcSE(this.svcSe)
+                .cmcwr(this.cmcWr)
+                .cnstcYear(this.cnstcYear)
+                .inoutDoor(this.inoutDoor)
+                .remars3(this.remars3)
+                .lat(this.lat)
+                .lnt(this.lnt)
+                .workDateTime(this.workDateTime)
+                .build();
+    }
 }
