@@ -7,13 +7,13 @@ import lombok.Getter;
 @Getter
 public class WifiApiPagingInfo {
     private final int totalCount;
-    private final int queryCount;
+    private final int requestCount;
     private final int maxRequestCount;
 
     @Builder
-    private WifiApiPagingInfo(int totalCount, int queryCount, int maxRequestCount) {
+    private WifiApiPagingInfo(int totalCount, int requestCount, int maxRequestCount) {
         this.totalCount = totalCount;
-        this.queryCount = queryCount;
+        this.requestCount = requestCount;
         this.maxRequestCount = WifiApiConfig.getInstance().getInfo().getMaxRequestCount();
     }
 }

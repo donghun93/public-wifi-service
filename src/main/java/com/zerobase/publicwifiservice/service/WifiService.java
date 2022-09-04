@@ -38,7 +38,7 @@ public class WifiService {
         wifiRepository.deleteAll();
         WifiRequestPaging paging = createPaging(pagingInfo.getMaxRequestCount());
 
-        for (int i = 0; i < pagingInfo.getQueryCount(); i++) {
+        for (int i = 0; i < pagingInfo.getRequestCount(); i++) {
             System.out.println(paging);
             loadAndSave(paging);
             paging.updatePagingNumber();

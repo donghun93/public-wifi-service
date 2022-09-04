@@ -18,14 +18,17 @@ public class WifiApiServiceImpl implements WifiApiService {
 
     @Override
     public WifiApiPagingInfo getWifiTotalCountAndQueryCount() {
-        WifiApiResponse wifi = getWifi(WifiApiRequest.builder()
+        WifiApiResponse response = getWifi(WifiApiRequest.builder()
                 .start(0)
                 .end(1)
                 .requestFileType(JSON)
                 .build());
+
+        int requestCount = getRequestCount(response);
+
         return WifiApiPagingInfo.builder()
-                .totalCount(wifi.getTotalCount())
-                .queryCount(wifi.getTotalCount() / WifiApiConfig.getInstance().getInfo().getMaxRequestCount() + 1)
+                .totalCount(response.getTotalCount())
+                .requestCount(requestCount)
                 .build();
     }
 
@@ -33,5 +36,14 @@ public class WifiApiServiceImpl implements WifiApiService {
     public WifiApiResponse getWifi(WifiApiRequest apiRequest) {
         String messageBody = apiProcessor.getWifiApiMessageBody(apiRequest);
         return messageParser.parsing(messageBody, apiRequest.getRequestFileType());
+    }
+
+    private int getRequestCount(WifiApiResponse response) {
+        int maxRequestCount = WifiApiConfig.getInstance().getInfo().getMaxRequestCount();
+        int requestCount = response.getTotalCount() / maxRequestCount;
+        if (requestCount % maxRequestCount > 0) {
+            requestCount += 1;
+        }
+        return requestCount;
     }
 }
