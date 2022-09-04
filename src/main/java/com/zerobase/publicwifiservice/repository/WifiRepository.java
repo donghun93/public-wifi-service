@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface WifiRepository {
     List<Wifi> findNearWifiInfo(WifiNearInfo wifiNearInfo);
-    void saveAll(List<Wifi> wifiList);
-    void deleteAll();
+    int saveAll(List<Wifi> wifiList);
+    int deleteAll();
 }

@@ -1,16 +1,18 @@
-package com.zerobase.publicwifiservice.repository.jdbc;
+package com.zerobase.publicwifiservice.repository.jdbc.old;
 
-import com.zerobase.publicwifiservice.config.ConnectionInfo;
+
 import com.zerobase.publicwifiservice.domain.Wifi;
 import com.zerobase.publicwifiservice.domain.WifiNearInfo;
 import com.zerobase.publicwifiservice.repository.WifiRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.ZeroBaseJdbcBase;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
+@RequiredArgsConstructor
+public class ZeroBaseJdbcOldWifiRepository extends ZeroBaseJdbcBase implements WifiRepository {
 
     @Override
     public List<Wifi> findNearWifiInfo(WifiNearInfo wifiNearInfo) {
@@ -70,8 +72,10 @@ public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
                 .build();
     }
 
+
+
     @Override
-    public void saveAll(List<Wifi> wifiList) {
+    public int saveAll(List<Wifi> wifiList) {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -96,6 +100,7 @@ public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
             }
 
             conn.commit(); // 트랜잭션 종료
+            return wifiList.size();
         } catch (SQLException e) {
             rollBack(conn);
             throw new RuntimeException(e);
@@ -146,7 +151,7 @@ public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
     }
 
     @Override
-    public void deleteAll() {
+    public int deleteAll() {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String deleteQuery = getDeleteAllQuery();
@@ -157,6 +162,7 @@ public class JdbcWifiRepository extends JdbcBase implements WifiRepository {
             pstmt = conn.prepareStatement(deleteQuery);
             int resultCnt = pstmt.executeUpdate();
             conn.commit();
+            return resultCnt;
         } catch (SQLException e) {
             rollBack(conn);
             throw new RuntimeException(e);
