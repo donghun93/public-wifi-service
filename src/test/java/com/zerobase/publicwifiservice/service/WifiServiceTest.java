@@ -4,13 +4,12 @@ import com.zerobase.api.WifiApiServiceImpl;
 import com.zerobase.api.config.WifiApiConfig;
 import com.zerobase.api.config.WifiApiInfo;
 import com.zerobase.api.parser.okhttp3.GsonWifiApiMessageParser;
-import com.zerobase.api.processor.okhttp3.OkHttp3RequestMaker;
 import com.zerobase.api.processor.okhttp3.OkHttp3WifiApiProcessor;
 import com.zerobase.publicwifiservice.config.ConnectionInfo;
 import com.zerobase.publicwifiservice.dto.WifiNearDetailInfoResponse;
 import com.zerobase.publicwifiservice.dto.WifiNearInfoRequest;
-import com.zerobase.publicwifiservice.repository.jdbc.JdbcHistoryRepository;
-import com.zerobase.publicwifiservice.repository.jdbc.JdbcWifiRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.old.ZeroBaseJdbcOldHistoryRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.old.ZeroBaseJdbcOldWifiRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,8 +48,8 @@ class WifiServiceTest {
         
         wifiService = new WifiService(
                 wifiApiService,
-                new JdbcWifiRepository(),
-                new JdbcHistoryRepository()
+                new ZeroBaseJdbcOldWifiRepository(),
+                new ZeroBaseJdbcOldHistoryRepository()
         );
     }
     
