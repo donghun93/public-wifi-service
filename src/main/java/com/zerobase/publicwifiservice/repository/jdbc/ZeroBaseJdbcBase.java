@@ -7,9 +7,8 @@ import lombok.RequiredArgsConstructor;
 import java.sql.*;
 
 @RequiredArgsConstructor
-public abstract class JdbcBase {
+public abstract class ZeroBaseJdbcBase {
     protected ConnectionInfo info;
-
     protected Connection getConnection() throws SQLException {
         try {
             if(info == null) {
