@@ -7,8 +7,11 @@ import com.zerobase.api.processor.okhttp3.OkHttp3WifiApiProcessor;
 import com.zerobase.publicwifiservice.controller.WifiController;
 import com.zerobase.publicwifiservice.repository.HistoryRepository;
 import com.zerobase.publicwifiservice.repository.WifiRepository;
-import com.zerobase.publicwifiservice.repository.jdbc.JdbcHistoryRepository;
-import com.zerobase.publicwifiservice.repository.jdbc.JdbcWifiRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.ZeroBaseJdbcHistoryRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.ZeroBaseJdbcWifiRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.jdbctemplate.ZeroBaseJdbcTemplate;
+import com.zerobase.publicwifiservice.repository.jdbc.old.ZeroBaseJdbcOldHistoryRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.old.ZeroBaseJdbcOldWifiRepository;
 import com.zerobase.publicwifiservice.service.HistoryService;
 import com.zerobase.publicwifiservice.service.WifiService;
 
@@ -16,6 +19,7 @@ public class AppConfig {
     private static volatile AppConfig instance = null;
     private WifiRepository wifiRepository;
     private HistoryRepository historyRepository;
+    private ZeroBaseJdbcTemplate zeroBaseJdbcTemplate;
 
     public static AppConfig getInstance() {
         if (instance == null) {
@@ -55,15 +59,24 @@ public class AppConfig {
 
     private WifiRepository wifiRepository() {
         if (wifiRepository == null) {
-            wifiRepository = new JdbcWifiRepository();
+            // wifiRepository = new ZeroBaseJdbcOldWifiRepository();
+            wifiRepository = new ZeroBaseJdbcWifiRepository(zeroBaseJdbcTemplate());
         }
         return wifiRepository;
     }
 
     private HistoryRepository historyRepository() {
         if (historyRepository == null) {
-            historyRepository = new JdbcHistoryRepository();
+            // historyRepository = new ZeroBaseJdbcOldHistoryRepository();
+            historyRepository = new ZeroBaseJdbcHistoryRepository(zeroBaseJdbcTemplate());
         }
         return historyRepository;
+    }
+
+    private ZeroBaseJdbcTemplate zeroBaseJdbcTemplate() {
+        if (zeroBaseJdbcTemplate == null) {
+            zeroBaseJdbcTemplate = new ZeroBaseJdbcTemplate();
+        }
+        return zeroBaseJdbcTemplate;
     }
 }

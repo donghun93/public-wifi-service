@@ -1,8 +1,8 @@
-package com.zerobase.publicwifiservice.repository.jdbc;
+package com.zerobase.publicwifiservice.repository.jdbc.old;
 
-import com.zerobase.publicwifiservice.config.ConnectionInfo;
 import com.zerobase.publicwifiservice.domain.History;
 import com.zerobase.publicwifiservice.repository.HistoryRepository;
+import com.zerobase.publicwifiservice.repository.jdbc.ZeroBaseJdbcBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcHistoryRepository extends JdbcBase implements HistoryRepository {
+public class ZeroBaseJdbcOldHistoryRepository extends ZeroBaseJdbcBase implements HistoryRepository {
 
     @Override
-    public void delete(Long deleteId) {
+    public int delete(Long deleteId) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String deleteQuery = "delete from " +
@@ -28,6 +28,7 @@ public class JdbcHistoryRepository extends JdbcBase implements HistoryRepository
             pstmt.setLong(1, deleteId);
             int resultCnt = pstmt.executeUpdate();
             conn.commit();
+            return resultCnt;
         } catch (SQLException e) {
             rollBack(conn);
             throw new RuntimeException(e);
@@ -38,7 +39,7 @@ public class JdbcHistoryRepository extends JdbcBase implements HistoryRepository
     }
 
     @Override
-    public void save(History history) {
+    public int save(History history) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String insertQuery = "insert into " +
@@ -53,6 +54,7 @@ public class JdbcHistoryRepository extends JdbcBase implements HistoryRepository
             pstmt.setDouble(2, history.getYLocation());
             int resultCnt = pstmt.executeUpdate();
             conn.commit();
+            return resultCnt;
         } catch (SQLException e) {
             rollBack(conn);
             throw new RuntimeException(e);
