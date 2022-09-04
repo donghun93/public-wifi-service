@@ -26,7 +26,7 @@
             <tr style="vertical-align: middle; height: 50px;">
                 <th>ID</th>
                 <th>X좌표</th>
-                <th>좌표</th>
+                <th>Y좌표</th>
                 <th>조회일자</th>
                 <th style="vertical-align: middle; text-align: center;
                 width: 120px;">비고</th>
